@@ -16,9 +16,7 @@ app.use(cors());
 app.use(express.json());
 
 app.get('/', async(req, res) => {
-  res.status(200).send({
-    message: 'Hello from Chips Ahoy',
-  })
+  res.status(200).send('Hello from Chips Ahoy');
 });
 
 const tgKey = process.env.TELEGRAM_KEY;
@@ -26,11 +24,12 @@ const tgKey = process.env.TELEGRAM_KEY;
 const Bot = new telegram(tgKey, { polling: true, filepath: false });
 const refusedMsg = 'Mời quý anh chị chim kút!';
 const invalidMsg = "Quý anh vui lòng khép loa thay vì thổi ra những điều nhảm nhí!";
-const botName = '@OnePampBot';
+const botName = '/maria';
 
 Bot.onText(/\/start/, (msg) => {
+  console.log('calling start--------------');
   if (!msg.from) return Bot.sendMessage(msg.chat.id, refusedMsg);
-  return Bot.sendMessage(msg.chat.id, "Xin chào! Rất vui được trò chuyện cùng bạn.");
+  return Bot.sendMessage(msg.chat.id, "Hello from Maria Ozawa");
 });
 
 Bot.on('text', async (msg) => {
